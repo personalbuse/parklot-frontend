@@ -9,11 +9,14 @@ import WashServices from './pages/WashServices'
 import IoTDevices from './pages/IoTDevices'
 import AdminConfig from './pages/AdminConfig'
 import Tariffs from './pages/Tariffs'
+import OperatorAgenda from './pages/OperatorAgenda'
+import ClientReservations from './pages/ClientReservations'
 import Layout from './components/Layout'
 
 function App() {
-  const { token } = useAuthStore()
+  const { token, user } = useAuthStore()
 
+  // Not authenticated - show landing/login
   if (!token) {
     return (
       <Routes>
@@ -23,6 +26,12 @@ function App() {
     )
   }
 
+  // Client role - simplified view for reservations only
+  if (user?.role === 'cliente') {
+    return <ClientReservations />
+  }
+
+  // Operators, admins, and other staff - full dashboard
   return (
     <Layout>
       <Routes>
@@ -30,6 +39,7 @@ function App() {
         <Route path="/parking" element={<ParkingMap />} />
         <Route path="/vehicles" element={<Vehicles />} />
         <Route path="/wash" element={<WashServices />} />
+        <Route path="/agenda" element={<OperatorAgenda />} />
         <Route path="/iot" element={<IoTDevices />} />
         <Route path="/tariffs" element={<Tariffs />} />
         <Route path="/admin" element={<AdminConfig />} />
@@ -40,4 +50,3 @@ function App() {
 }
 
 export default App
-

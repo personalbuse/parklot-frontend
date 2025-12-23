@@ -24,6 +24,7 @@ const navItems = [
   { path: '/parking', icon: MapPin, label: 'Mapa' },
   { path: '/vehicles', icon: Car, label: 'Vehículos' },
   { path: '/wash', icon: Droplets, label: 'Lavadero' },
+  { path: '/agenda', icon: Settings, label: 'Agenda' },
   { path: '/iot', icon: Cpu, label: 'IoT', adminOnly: true },
   { path: '/tariffs', icon: DollarSign, label: 'Tarifas', adminOnly: true },
   { path: '/admin', icon: Settings, label: 'Config', adminOnly: true },

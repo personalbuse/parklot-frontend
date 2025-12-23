@@ -138,4 +138,34 @@ export const tariffsApi = {
     api.get('/tariffs/calculate', { params: { vehicle_type: vehicleType, minutes } }),
 }
 
+// Reservations
+export const reservationsApi = {
+  // Client endpoints
+  getMyReservations: (status?: string) => 
+    api.get('/reservations', { params: status ? { status } : {} }),
+  create: (data: {
+    reservation_type: string;
+    vehicle_type: string;
+    vehicle_plate: string;
+    wash_type?: string;
+    reservation_date: string;
+    start_time: string;
+    end_time: string;
+    notes?: string;
+  }) => api.post('/reservations', data),
+  cancel: (id: number) => api.delete(`/reservations/${id}`),
+  getAvailableSlots: (date: string, reservationType: string) => 
+    api.get('/reservations/available-slots', { 
+      params: { reservation_date: date, reservation_type: reservationType } 
+    }),
+  // Operator endpoints
+  getAgenda: (date?: string) => 
+    api.get('/reservations/agenda', { params: date ? { agenda_date: date } : {} }),
+  getAll: (params?: { status?: string; reservation_type?: string; from_date?: string; to_date?: string }) =>
+    api.get('/reservations/all', { params }),
+  updateStatus: (id: number, status: string, notes?: string) => 
+    api.put(`/reservations/${id}/status`, { status, notes }),
+}
+
 export default api
+
