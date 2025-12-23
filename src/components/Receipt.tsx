@@ -1,5 +1,5 @@
 import { forwardRef, useRef } from 'react'
-import { X, Printer, Eye, Download } from 'lucide-react'
+import { X, Printer, Eye } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 export interface ReceiptData {
