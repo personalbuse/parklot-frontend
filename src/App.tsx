@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useAuthStore } from './stores/authStore'
 import Login from './pages/Login'
+import LandingPage from './pages/LandingPage'
 import Dashboard from './pages/Dashboard'
 import ParkingMap from './pages/ParkingMap'
 import Vehicles from './pages/Vehicles'
@@ -14,7 +15,12 @@ function App() {
   const { token } = useAuthStore()
 
   if (!token) {
-    return <Login />
+    return (
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="*" element={<LandingPage />} />
+      </Routes>
+    )
   }
 
   return (
@@ -34,3 +40,4 @@ function App() {
 }
 
 export default App
+

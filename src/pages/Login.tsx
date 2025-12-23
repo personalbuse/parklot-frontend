@@ -1,10 +1,12 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Cpu, Eye, EyeOff, Loader2 } from 'lucide-react'
+import { Cpu, Eye, EyeOff, Loader2, ArrowLeft } from 'lucide-react'
 import { useAuthStore } from '../stores/authStore'
 import { authApi } from '../services/api'
 
 export default function Login() {
+  const navigate = useNavigate()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
@@ -39,6 +41,15 @@ export default function Login() {
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-md"
       >
+        {/* Back Button */}
+        <button
+          onClick={() => navigate('/')}
+          className="flex items-center gap-2 text-gray-400 hover:text-primary mb-6 transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          <span className="text-sm">Volver al inicio</span>
+        </button>
+
         {/* Logo */}
         <div className="text-center mb-8">
           <motion.div
@@ -49,7 +60,7 @@ export default function Login() {
           >
             <Cpu className="w-10 h-10 text-primary" />
           </motion.div>
-          <h1 className="text-3xl font-bold neon-text-cyan mb-2">ParkIoT</h1>
+          <h1 className="text-3xl font-bold neon-text-cyan mb-2">ParkLot</h1>
           <p className="text-gray-400">Sistema Inteligente de Parqueadero</p>
         </div>
 
